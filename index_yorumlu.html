@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Berra Akkaş Oda Haritası</title>
+  <style>
+    
+/* Sayfa genel arka plan ve yazı tipi ayarları */
+body {
+      background-color: #f8f8f8;
+      font-family: sans-serif;
+      margin: 0;
+    }
+
+    
+/* Oda kutusu – desenli parke zemin, kenar çizgili, grid efektli */
+.oda {
+      position: relative;
+      width: 600px;
+      height: 500px;
+      border: 4px solid #000;
+      margin: 20px auto;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px),
+        url('parke_foto.jpg');
+      background-size: 25px 25px, 25px 25px, cover;
+      background-repeat: repeat;
+    }
+
+    .parca {
+      position: absolute;
+      border: 2px solid #333;
+      color: white;
+      padding: 4px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+      font-size: 10px;
+      z-index: 1;
+    }
+
+    .parca:hover {
+      filter: brightness(120%);
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .parca:hover::after {
+      content: attr(data-hover);
+    }
+
+    .parca::before {
+      content: attr(data-label);
+    }
+
+    .parca:hover::before {
+      content: "";
+    }
+
+    .kapi::before {
+      content: "";
+    }
+
+    
+/* Masa – sağ üst köşeye konumlanmış pembe kutu */
+.masa {
+      width: 120px;
+      height: 80px;
+      background-color: pink;
+      top: 20px;
+      right: 30px;
+    }
+
+    
+/* Dolap – sol üst köşede, mor renkte */
+.dolap {
+      width: 100px;
+      height: 150px;
+      background-color: purple;
+      top: 20px;
+      left: 20px;
+    }
+
+    
+/* Yatak – sol alt köşede, geniş mavi alan */
+.yatak {
+      width: 200px;
+      height: 100px;
+      background-color: steelblue;
+      bottom: 20px;
+      left: 30px;
+    }
+
+    
+/* Sandalye – masa yakınında, yuvarlak kırmızı şekil */
+.sandalye {
+      width: 40px;
+      height: 40px;
+      background-color: red;
+      top: 110px;
+      right: 70px;
+      border-radius: 50%;
+    }
+
+    
+/* Halı – ortada, görselli desen resmi, döndürülmüş */
+.hali {
+      width: 100px;
+      height: 160px;
+      background-image: url('hali_desen.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      bottom: 170px;
+      left: 250px;
+      color: white;
+      font-weight: bold;
+      text-shadow:
+        -2px -2px 3px black,
+         2px -2px 3px black,
+        -2px  2px 3px black,
+         2px  2px 3px black;
+      transform: rotate(45deg);
+      transform-origin: center;
+      z-index: 1;
+    }
+
+    
+/* Pencere – üst duvarda, mavi çift kenarlı çerçeve */
+.pencere {
+      width: 50px;
+      height: 10px;
+      background-color: #87CEFA;
+      border: 4px double white;
+      top: 0px;
+      left: 250px;
+    }
+
+    
+/* Bitki – saksılı, sağ alt köşeye konumlanmış */
+.bitki {
+      width: 40px;
+      height: 60px;
+      background-color: #00FF00;
+      bottom: 20px;
+      right: 30px;
+      border-radius: 10px;
+    }
+
+    
+/* Kapı – sağ kenarda, tıklanabilir açılır yapı */
+.kapi {
+      position: absolute;
+      width: 10px;
+      height: 100px;
+      background-color: #D2691E;
+      bottom: 150px;
+      right: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: right bottom;
+      transition: transform 0.8s ease;
+      transform: rotate(0deg);
+      z-index: 2;
+    }
+
+    .kapi.acik {
+      transform: rotate(-90deg);
+    }
+
+    .kapiyazi {
+      display: block;
+      transform: rotate(90deg);
+      transform-origin: center;
+      font-size: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    
+/* Ölçek çubuğu – görsel referans çizgisi */
+.olcek-cubugu {
+      width: 100px;
+      height: 8px;
+      background-color: black;
+      margin: 20px auto 5px auto;
+    }
+
+    .olcek-yazi {
+      text-align: center;
+      font-size: 12px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Oda</h1>
+
+  
+<!-- Oda kutusu – Tüm öğeler burada yer alıyor -->
+<div class="oda">
+    
+  <!-- Masa – sağ üstte, pembe -->
+  <div class="parca masa"  data-label="Masa" data-hover="Pembe masa"></div>
+    
+  <!-- Dolap – sol üstte, mor -->
+  <div class="parca dolap"  data-label="Dolap" data-hover="Mor dolap"></div>
+    
+  <!-- Yatak – sol altta, mavi geniş alan -->
+  <div class="parca yatak"  data-label="Yatak" data-hover="Mavi yatak"></div>
+    
+  <!-- Sandalye – masa yanında, kırmızı yuvarlak -->
+  <div class="parca sandalye"  data-label="Sandalye" data-hover="Yeşil sandalye"></div>
+    
+  <!-- Halı – ortada, desenli ve döndürülmüş -->
+  <div class="parca hali"  data-label="Halı" data-hover="Desenli Halı"></div>
+    
+  <!-- Pencere – üst kenarda, cam efekti -->
+  <div class="parca pencere"  data-label="Pencere" data-hover="Camlı pencere"></div>
+    
+  <!-- Bitki – yeşil saksı, sağ alt -->
+  <div class="parca bitki"  data-label="Bitki" data-hover="Saksı bitkisi"></div>
+    
+  <!-- Kapı – sağ kenarda, tıklanınca açılır -->
+  <div class="parca kapi"><span class="kapiyazi">Kapı</span></div>
+  </div>
+
+  <div class="olcek-cubugu"></div>
+  <p class="olcek-yazi">100 piksel = 100 cm (1 metre)</p>
+  <p class="olcek-yazi">Bu çizimde 1 piksel = 1 cm ölçeğiyle çalışılmıştır.</p>
+
+  <script>
+    
+// Fare hareket ettikçe ekranda çiçek animasyonu gösterilir
+document.addEventListener('mousemove', function(e) {
+      const flower = document.createElement('div');
+      flower.innerText = '🌸';
+      flower.style.position = 'fixed';
+      flower.style.left = e.clientX + 'px';
+      flower.style.top = e.clientY + 'px';
+      flower.style.pointerEvents = 'none';
+      flower.style.fontSize = '24px';
+      flower.style.opacity = 1;
+      flower.style.transition = 'all 1s ease-out';
+      document.body.appendChild(flower);
+      setTimeout(() => {
+        flower.style.transform = 'translateY(-30px) scale(1.5)';
+        flower.style.opacity = 0;
+      }, 10);
+      setTimeout(() => {
+        document.body.removeChild(flower);
+      }, 1000);
+    });
+
+    
+// Kapıya tıklanınca dönüş animasyonu uygulanır
+document.querySelector('.kapi').addEventListener('click', function () {
+      this.classList.toggle('acik');
+    });
+  </script>
+</body>
+</html>
+
+
